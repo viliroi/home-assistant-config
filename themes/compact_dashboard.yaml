@@ -1,0 +1,9 @@
+Compact Dashboard:
+  card-mod-theme: Compact Dashboard
+  card-mod-card: |
+    hui-masonry-view {
+      --masonry-view-card-margin: 0px !important;
+    }
+    ha-card {
+      margin: 0px !important;
+    }

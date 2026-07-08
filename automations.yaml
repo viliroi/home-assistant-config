@@ -1,0 +1,295 @@
+- id: '1769607048295'
+  alias: Включене лампочки на кухне
+  description: ''
+  triggers:
+  - trigger: time
+    at: '17:30:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: e67d608befe18470c8f7bea30175a015
+    entity_id: 7ba69454496083f59884989ef5499a02
+    domain: light
+  mode: single
+- id: '1769607452794'
+  alias: Выключение лампочки на кухне по локальной сети
+  description: ''
+  triggers:
+  - trigger: time
+    at: 01:00:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - sat
+    - fri
+    - sun
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: e67d608befe18470c8f7bea30175a015
+    entity_id: 7ba69454496083f59884989ef5499a02
+    domain: light
+  mode: single
+- id: '1769927556188'
+  alias: 'Fix: Restart Music Assistant after Start'
+  description: Перезапуск Music Assistant для подхвата сетевой папки Music_Share
+  triggers:
+  - event: start
+    trigger: homeassistant
+  actions:
+  - delay: 00:04:00
+  - data:
+      addon: d5369777_music_assistant
+    action: hassio.addon_restart
+  mode: single
+- id: '1771408972894'
+  alias: 'Освещение: Контроль Yeelight (ФИНАЛ)'
+  triggers:
+  - trigger: state
+    entity_id: sensor.datchik_osveshcheniia_illuminance
+    id: logic
+  - trigger: time
+    at: '16:00:00'
+    id: logic
+  - trigger: time
+    at: 01:00:00
+    id: logic
+  - trigger: state
+    entity_id: light.yeelink_color5_d2a9_light_2
+    from: unavailable
+    id: logic
+  - trigger: homeassistant
+    event: start
+    id: logic
+  actions:
+  - delay: 00:00:05
+  - choose:
+    - conditions:
+      - condition: time
+        after: '16:00:00'
+        before: 01:00:00
+      - condition: numeric_state
+        entity_id: sensor.datchik_osveshcheniia_illuminance
+        below: 3
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.yeelink_color5_d2a9_light_2
+    - conditions:
+      - or:
+        - condition: numeric_state
+          entity_id: sensor.datchik_osveshcheniia_illuminance
+          above: 3
+        - condition: time
+          after: 01:00:00
+          before: '16:00:00'
+      sequence:
+      - condition: state
+        entity_id: light.yeelink_color5_d2a9_light_2
+        state: 'on'
+      - action: light.turn_off
+        target:
+          entity_id: light.yeelink_color5_d2a9_light_2
+- id: '1771513348511'
+  alias: 'ПК: Синхронизация с Алисой (Универсальная)'
+  description: Включает или выключает ПК импульсом при любой команде Алисы
+  triggers:
+  - entity_id: input_boolean.kompiuter_lokalnyi
+    trigger: state
+  actions:
+  - action: switch.turn_on
+    target:
+      entity_id: switch.kompiuter_po_lokalnoi_seti
+  - delay: 00:00:02
+  - action: switch.turn_off
+    target:
+      entity_id: switch.kompiuter_po_lokalnoi_seti
+  - delay: 00:00:05
+  - action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.kompiuter_lokalnyi
+- id: '1773748287813'
+  alias: 'Стирка: 1-Начало (исправлено)'
+  description: Ждет и нагрузку, и вибрацию
+  triggers:
+  - trigger: numeric_state
+    entity_id: sensor.rozetka_dlia_stiralnoi_mashinki_power
+    above: 30
+    for:
+      seconds: 15
+  conditions:
+  - condition: state
+    entity_id: input_boolean.rezhim_stirki
+    state: 'off'
+  actions:
+  - wait_for_trigger:
+    - trigger: state
+      entity_id: binary_sensor.datchik_vibratsii_vibration
+      to: 'on'
+    timeout: 00:10:00
+    continue_on_timeout: false
+  - action: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.rezhim_stirki
+  mode: restart
+- id: '1773748304305'
+  alias: 'Стирка: 2-Конец и Оповещение'
+  description: Озвучивает завершение, когда мощность упала и нет движения 3 минуты
+  triggers:
+  - trigger: numeric_state
+    entity_id: sensor.rozetka_dlia_stiralnoi_mashinki_power
+    below: 4
+    for:
+      minutes: 5
+  - trigger: state
+    entity_id: binary_sensor.datchik_vibratsii_vibration
+    to: 'off'
+    for:
+      minutes: 3
+  conditions:
+  - condition: state
+    entity_id: input_boolean.rezhim_stirki
+    state: 'on'
+  - condition: numeric_state
+    entity_id: sensor.rozetka_dlia_stiralnoi_mashinki_power
+    below: 4
+  - condition: state
+    entity_id: binary_sensor.datchik_vibratsii_vibration
+    state: 'off'
+    for:
+      minutes: 3
+  actions:
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.yandex_station_r10vpb9007pn5g
+    data:
+      volume_level: 0.6
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.yandex_station_r10vpb9007pn5g
+    data:
+      media:
+        media_content_id: Хозяин, стирка окончена. Пора развесить бельё!
+        media_content_type: text
+  - delay: 00:00:05
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.yandex_station_r10vpb9007pn5g
+    data:
+      volume_level: 0.3
+  - action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.rezhim_stirki
+  mode: single
+- id: '1774521837198'
+  alias: Оповещение об окончании таймера (Наби)
+  description: Харизматичный ответ Наби при завершении таймера с правильной логикой
+    питания
+  triggers:
+  - trigger: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.general
+  actions:
+  - action: switch.turn_on
+    target:
+      entity_id: switch.audio_satellite_s3_speaker_shutdown_pin
+    data: {}
+  - delay: 00:00:02
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.yandex_station_r10vpb9007pn5g
+    data:
+      volume_level: 0.8
+  - action: conversation.process
+    data:
+      agent_id: conversation.nabi
+      text: Таймер закончился. Скажи об этом пользователю коротко и иронично. Не используй
+        спецсимволы.
+    response_variable: agent_answer
+  - action: tts.speak
+    target:
+      entity_id: tts.piper
+    data:
+      cache: true
+      media_player_entity_id: media_player.audio_satellite_s3_s3_audio_speaker
+      message: "{% if agent_answer.response.speech.plain.speech %}\n  {{ agent_answer.response.speech.plain.speech
+        }}\n{% else %}\n  Хозяин, время вышло, а ваш железный помощник прикусил язык.\n{%
+        endif %}"
+  - delay: 00:00:12
+  - action: switch.turn_off
+    target:
+      entity_id: switch.audio_satellite_s3_speaker_shutdown_pin
+  mode: single
+- id: '1776485128479'
+  alias: 'Стирка: Принудительный сброс режима'
+  description: Страховка на случай сбоя с голосовым оповещением через Алису
+  triggers:
+  - trigger: numeric_state
+    entity_id: sensor.rozetka_dlia_stiralnoi_mashinki_power
+    below: 3
+    for:
+      minutes: 40
+  - trigger: state
+    entity_id: input_boolean.rezhim_stirki
+    to: 'on'
+    for:
+      hours: 5
+  conditions:
+  - condition: state
+    entity_id: input_boolean.rezhim_stirki
+    state: 'on'
+  actions:
+  - action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.rezhim_stirki
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.yandex_station_r10vpb9007pn5g
+    data:
+      volume_level: 0.6
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.yandex_station_r10vpb9007pn5g
+    data:
+      media:
+        media_content_id: Внимание. Произошел сбой автоматизации стирки. Тумблер режима
+          сброшен принудительно. Пожалуйста, проверьте стиральную машину.
+        media_content_type: text
+  - delay: 00:00:08
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.yandex_station_r10vpb9007pn5g
+    data:
+      volume_level: 0.3
+  mode: single
+- id: '1777634697698'
+  alias: 'Набу: Голос через Малинку'
+  description: Перенаправляет ответ с микрофона ESP32 на динамики Raspberry Pi
+  triggers:
+  - entity_id: assist_satellite.robit
+    attribute: tts_response
+    trigger: state
+  conditions:
+  - condition: template
+    value_template: '{{ state_attr(''assist_satellite.robit'', ''tts_response'') !=
+      None }}'
+  actions:
+  - target:
+      entity_id: tts.piper
+    data:
+      cache: true
+      media_player_entity_id: media_player.music_player_daemon_2
+      message: '{{ state_attr(''assist_satellite.robit'', ''tts_response'') }}'
+    action: tts.speak
+  mode: restart

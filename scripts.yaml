@@ -1,0 +1,57 @@
+relaks_na_20_minut:
+  alias: Релакс на 20 минут
+  sequence:
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.iandeks_stantsiia_midi
+    data:
+      media_content_id: library://playlist/9
+      media_content_type: playlist
+  - delay: 00:20:00
+  - action: media_player.media_stop
+    target:
+      entity_id: media_player.iandeks_stantsiia_midi
+  mode: restart
+sleduiushchij_trek_iandeks_midi:
+  alias: Следующий трек (Яндекс Миди)
+  sequence:
+  - action: media_player.media_next_track
+    target:
+      entity_id: media_player.iandeks_stantsiia_midi
+  mode: single
+  icon: mdi:skip-next
+  description: ''
+relaks_upravlenie:
+  alias: Релакс Управление
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: media_player.iandeks_stantsiia_midi
+        state: playing
+      sequence:
+      - action: media_player.media_next_track
+        target:
+          entity_id: media_player.iandeks_stantsiia_midi
+    default:
+    - action: script.relaks_na_20_minut
+  mode: restart
+  description: ''
+google_search:
+  alias: Google Search
+  sequence:
+  - data:
+      agent_id: YOUR_SEARCH_AGENT_ID
+      text: '{{ query }}'
+    response_variable: result
+    action: conversation.process
+  - stop: '{{ result.response.speech.plain.speech }}'
+  mode: single
+  description: ''
+vkliuchit_poisk_bluetooth:
+  alias: Включить поиск Bluetooth
+  sequence:
+  - action: shell_command.bt_discoverable
+  mode: single
+  icon: mdi:bluetooth-connect
+  description: ''

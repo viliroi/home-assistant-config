@@ -1,0 +1,63 @@
+version: 5
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://core-mosquitto:1883
+  user: viliroi
+  password: 79176448783v
+serial:
+  port: >-
+    /dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_d23546b6680ff011a0d89f9a41f80dde-if00-port0
+  adapter: ezsp
+  baudrate: 115200
+  rtscts: false
+advanced:
+  log_level: info
+  channel: 25
+  network_key:
+    - 196
+    - 214
+    - 105
+    - 76
+    - 114
+    - 159
+    - 151
+    - 221
+    - 26
+    - 48
+    - 25
+    - 153
+    - 132
+    - 114
+    - 189
+    - 181
+  pan_id: 45905
+  ext_pan_id:
+    - 163
+    - 200
+    - 36
+    - 20
+    - 213
+    - 9
+    - 215
+    - 66
+frontend:
+  enabled: true
+  port: 8099
+homeassistant:
+  enabled: true
+devices:
+  '0x8c65a3fffee0fe50':
+    friendly_name: Датчик протечки воды
+  '0x2c1165fffef64d1a':
+    friendly_name: Датчик утечки газа
+  '0xa4c13871700836e1':
+    friendly_name: Датчик освещения
+    debounce_ignore: []
+    debounce: 30
+  '0xa4c138bae110239f':
+    friendly_name: Датчик вибрации
+    disable_automatic_update_check: true
+  '0xa4c138d44dbb1b6c':
+    friendly_name: Розетка для стиральной машинки
+availability:
+  enabled: true

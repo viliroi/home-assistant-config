@@ -1,0 +1,270 @@
+# Biofects Extract Themes
+biofects-extract:
+  # Main Interface Colors
+  primary-color: "#27e1fa"
+  accent-color: "#fae127"
+  dark-primary-color: "#19a0b3"
+  light-primary-color: "#7eecfb"
+  
+  # Text Colors
+  primary-text-color: "#cccccc"
+  text-primary-color: "#eeeeee"
+  secondary-text-color: "#87f7fc"
+  disabled-text-color: "#666666"
+  label-badge-border-color: "#27e1fa"
+  
+  # Sidebar
+  sidebar-icon-color: "#27e1fa"
+  sidebar-text-color: "#cccccc"
+  sidebar-selected-background-color: "rgba(39, 225, 250, 0.15)"
+  sidebar-selected-icon-color: "#fae127"
+  sidebar-selected-text-color: "#fae127"
+  sidebar-background-color: "rgba(2, 22, 26, 0.95)"
+  
+  # Background
+  primary-background-color: "#02161a"
+  secondary-background-color: "#000000"
+  divider-color: "rgba(39, 225, 250, 0.2)"
+  table-row-background-color: "#02161a"
+  table-row-alternative-background-color: "rgba(39, 225, 250, 0.05)"
+  
+  # Cards
+  card-background-color: "rgba(2, 22, 26, 0.85)"
+  paper-card-background-color: "rgba(2, 22, 26, 0.85)"
+  paper-listbox-background-color: "rgba(0, 0, 0, 0.95)"
+  paper-item-icon-color: "#27e1fa"
+  paper-item-icon-active-color: "#fae127"
+  
+  # Switches & Toggles
+  switch-checked-color: "#27e1fa"
+  switch-unchecked-color: "#2d2d2d"
+  switch-checked-button-color: "#fae127"
+  switch-unchecked-button-color: "#4d4d4d"
+  switch-checked-track-color: "rgba(39, 225, 250, 0.5)"
+  switch-unchecked-track-color: "rgba(45, 45, 45, 0.5)"
+  
+  # Sliders
+  slider-color: "#27e1fa"
+  slider-secondary-color: "#fae127"
+  slider-track-color: "rgba(39, 225, 250, 0.3)"
+  
+  # Labels & Badges
+  label-badge-red: "#ff3333"
+  label-badge-text-color: "#eeeeee"
+  label-badge-background-color: "rgba(39, 225, 250, 0.2)"
+  
+  # States
+  state-icon-color: "#27e1fa"
+  state-icon-active-color: "#fae127"
+  state-icon-unavailable-color: "#666666"
+  
+  # Alerts & Errors
+  error-color: "#ff3333"
+  warning-color: "#fae127"
+  success-color: "#00ff88"
+  info-color: "#27e1fa"
+  
+  # Header
+  app-header-background-color: "rgba(2, 22, 26, 0.95)"
+  app-header-text-color: "#cccccc"
+  app-header-selection-bar-color: "#27e1fa"
+  
+  # Code & Markdown
+  code-text-color: "#fae127"
+  markdown-code-background-color: "rgba(39, 225, 250, 0.1)"
+  
+    # Borders & Shadows
+  ha-card-border-color: "rgba(39, 225, 250, 0.25)"
+  ha-card-border-width: "1px"
+  ha-card-box-shadow: "0 0 5px rgba(39, 225, 250, 0.5)"
+  ha-view-sections-column-gap: 8px
+  ha-view-sections-row-gap: 8px
+  ha-view-sections-column-min-width: 250px # Можно также чуть уменьшить мин. ширину колонки
+
+  
+  # Chips
+  chip-background-color: "rgba(39, 225, 250, 0.15)"
+  chip-text-color: "#cccccc"
+  chip-icon-color: "#27e1fa"
+  
+  # Tables
+  table-header-background-color: "rgba(2, 22, 26, 0.95)"
+  data-table-background-color: "rgba(2, 22, 26, 0.85)"
+  
+  # Input Fields & Text Areas
+  input-fill-color: "rgba(2, 22, 26, 0.9)"
+  input-disabled-fill-color: "rgba(2, 22, 26, 0.5)"
+  input-ink-color: "#cccccc"
+  input-label-ink-color: "#87f7fc"
+  input-disabled-ink-color: "#666666"
+  input-dropdown-icon-color: "#27e1fa"
+  
+  # Material Design Components
+  mdc-theme-primary: "#27e1fa"
+  mdc-theme-secondary: "#fae127"
+  mdc-theme-on-primary: "#02161a"
+  mdc-theme-on-secondary: "#02161a"
+  mdc-theme-surface: "#02161a"
+  mdc-theme-background: "#02161a"
+  mdc-theme-on-surface: "#cccccc"
+  mdc-text-field-fill-color: "rgba(2, 22, 26, 0.9)"
+  mdc-text-field-ink-color: "#cccccc"
+  mdc-text-field-label-ink-color: "#87f7fc"
+  mdc-text-field-disabled-fill-color: "rgba(2, 22, 26, 0.5)"
+  mdc-text-field-disabled-ink-color: "#666666"
+  mdc-text-field-idle-line-color: "rgba(39, 225, 250, 0.3)"
+  mdc-text-field-hover-line-color: "rgba(39, 225, 250, 0.6)"
+  mdc-select-fill-color: "rgba(2, 22, 26, 0.9)"
+  mdc-select-ink-color: "#cccccc"
+  mdc-select-label-ink-color: "#87f7fc"
+  mdc-select-dropdown-icon-color: "#27e1fa"
+  mdc-select-idle-line-color: "rgba(39, 225, 250, 0.3)"
+  mdc-select-hover-line-color: "rgba(39, 225, 250, 0.6)"
+  
+  # Dialogs & Popups
+  mdc-dialog-scrim-color: "rgba(0, 0, 0, 0.7)"
+  mdc-dialog-box-shadow: "0 0 20px rgba(39, 225, 250, 0.4)"
+  
+  # Additional material fixes
+  material-background-color: "#02161a"
+  material-secondary-background-color: "#000000"
+  material-disabled-text-color: "#666666"
+  
+  # Card mod for aggressive styling
+  card-mod-theme: biofects-extract
+  card-mod-root: |
+    /* Text Fields */
+    ha-textfield,
+    mwc-textfield,
+    ha-selector-text,
+    ha-selector-number,
+    .mdc-text-field {
+      --mdc-text-field-fill-color: rgba(2, 22, 26, 0.9) !important;
+      --mdc-text-field-ink-color: #cccccc !important;
+      --mdc-text-field-label-ink-color: #87f7fc !important;
+      --mdc-text-field-idle-line-color: rgba(39, 225, 250, 0.3) !important;
+      --mdc-text-field-hover-line-color: rgba(39, 225, 250, 0.6) !important;
+      --mdc-theme-primary: #27e1fa !important;
+      --mdc-theme-surface: #02161a !important;
+    }
+    
+    /* Select Fields */
+    ha-selector-select,
+    mwc-select,
+    .mdc-select {
+      --mdc-select-fill-color: rgba(2, 22, 26, 0.9) !important;
+      --mdc-select-ink-color: #cccccc !important;
+      --mdc-select-label-ink-color: #87f7fc !important;
+      --mdc-select-dropdown-icon-color: #27e1fa !important;
+      --mdc-select-idle-line-color: rgba(39, 225, 250, 0.3) !important;
+      --mdc-select-hover-line-color: rgba(39, 225, 250, 0.6) !important;
+      --mdc-theme-primary: #27e1fa !important;
+      --mdc-theme-surface: #02161a !important;
+    }
+    
+    /* Raw Inputs */
+    input,
+    textarea,
+    .mdc-text-field__input {
+      background-color: rgba(2, 22, 26, 0.9) !important;
+      color: #cccccc !important;
+      border-color: rgba(39, 225, 250, 0.3) !important;
+    }
+    
+    input:hover,
+    textarea:hover {
+      border-color: rgba(39, 225, 250, 0.6) !important;
+    }
+    
+    input:focus,
+    textarea:focus {
+      border-color: #27e1fa !important;
+      outline-color: #27e1fa !important;
+    }
+    
+    /* Tables */
+    table,
+    .data-table,
+    ha-data-table {
+      background-color: rgba(2, 22, 26, 0.85) !important;
+      color: #cccccc !important;
+    }
+    
+    th,
+    thead,
+    .mdc-data-table__header-cell {
+      background-color: rgba(2, 22, 26, 0.95) !important;
+      color: #eeeeee !important;
+    }
+    
+    td,
+    .mdc-data-table__cell {
+      color: #cccccc !important;
+    }
+    
+    tr:hover,
+    .mdc-data-table__row:hover {
+      background-color: rgba(39, 225, 250, 0.1) !important;
+    }
+  
+  card-mod-more-info: |
+    $: |
+      /* Dialog backgrounds */
+      .mdc-dialog__surface {
+        background-color: #02161a !important;
+      }
+      
+      /* Form fields in dialogs */
+      .mdc-text-field,
+      input,
+      textarea {
+        background-color: rgba(2, 22, 26, 0.9) !important;
+        color: #cccccc !important;
+      }
+      
+      .mdc-text-field__input {
+        color: #cccccc !important;
+      }
+      
+      /* Table in dialogs */
+      table,
+      th,
+      td {
+        background-color: rgba(2, 22, 26, 0.85) !important;
+        color: #cccccc !important;
+      }
+      
+      th {
+        background-color: rgba(2, 22, 26, 0.95) !important;
+        color: #eeeeee !important;
+      }
+  
+  card-mod-card: |
+    /* Card-level overrides */
+    ha-card {
+      --primary-text-color: #cccccc !important;
+      --secondary-text-color: #87f7fc !important;
+    }
+    
+    /* All inputs inside cards */
+    ha-card input,
+    ha-card textarea,
+    ha-card .mdc-text-field__input {
+      background-color: rgba(2, 22, 26, 0.9) !important;
+      color: #cccccc !important;
+    }
+    
+    /* Tables inside cards */
+    ha-card table {
+      background-color: rgba(2, 22, 26, 0.85) !important;
+    }
+    
+    ha-card th {
+      background-color: rgba(2, 22, 26, 0.95) !important;
+      color: #eeeeee !important;
+    }
+    
+    ha-card td {
+      color: #cccccc !important;
+    }
+

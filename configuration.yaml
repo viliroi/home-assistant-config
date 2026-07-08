@@ -1,0 +1,101 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Включаем поддержку медиа-истокников
+media_source:
+
+# Темы оформления
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Настройки HTTP прокси
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.0/24
+    - 172.30.32.0/24
+    - 127.0.0.1
+    - 192.168.2.238
+    - 172.30.33.2
+    - 172.30.32.0/23
+
+# Основные настройки и автоматический вход для Малинки
+homeassistant:
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.2.173
+      allow_bypass_login: true
+      trusted_users:
+        "192.168.2.173": "78152eee53ae49168adfa98054f22ecf"
+    - type: homeassistant
+  # ----------------------------------
+  media_dirs:
+    local: /media
+  customize:
+    binary_sensor.vash_datchik:
+      device_class: moisture
+    
+# Блок интеграции Яндекса (настройки для Алисы)
+yandex_smart_home:
+  entity_config:
+    script.relaks_upravlenie:
+      name: "Релакс кнопка"
+      type: devices.types.switch
+
+    sensor.0x8c65a3fffee0fe50_temperature:
+      name: "Температура в комнате"
+
+    media_player.iandeks_stantsiia_midi:
+      name: "Музыкальный центр"
+
+# Шаблоны (Выключатель Релакс)
+template:
+  - switch:
+      - name: Музыка Релакс
+        unique_id: relax_music_toggle
+        state: "{{ is_state('media_player.iandeks_stantsiia_midi', 'playing') }}"
+        turn_on:
+          action: script.relaks_muzyka_na_5_minut
+        turn_off:
+          action: media_player.media_stop
+          target:
+            entity_id: media_player.iandeks_stantsiia_midi
+
+# Отслеживание устройств (Роутер)
+device_tracker:
+  - platform: luci
+    host: 192.168.2.1
+    username: root
+    password: 79176448783v
+    interval_seconds: 10
+    consider_home: 180
+    new_device_defaults:
+      track_new_devices: true
+
+# --- ПОИСК В ИНТЕРНЕТЕ ---
+rest_command:
+  serper_search:
+    url: "https://google.serper.dev"
+    method: post
+    headers:
+      X-API-KEY: "c5e8073b2170ba0d78df0aa12514d0ccc5dc55da"
+      Content-Type: "application/json"
+    payload: '{"q": "{{ query }}"}'
+    content_type: "application/json"
+    
+shell_command:
+  bt_discoverable: "ssh -o StrictHostKeyChecking=no viliroi@192.168.2.173 'sudo bluetoothctl discoverable on'"
+
+# --- НАСТРОЙКИ ДЛЯ ESP32-C3 VOICE SATELLITE ---
+sensor:
+  - platform: time_date
+    display_options:
+      - 'time'
+      
+assist_pipeline:
+  debug_recording_dir: /share/assist_pipeline
