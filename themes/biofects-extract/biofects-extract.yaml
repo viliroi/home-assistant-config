@@ -73,15 +73,14 @@ biofects-extract:
   code-text-color: "#fae127"
   markdown-code-background-color: "rgba(39, 225, 250, 0.1)"
   
-    # Borders & Shadows
+  # Borders & Shadows
   ha-card-border-color: "rgba(39, 225, 250, 0.25)"
   ha-card-border-width: "1px"
   ha-card-box-shadow: "0 0 5px rgba(39, 225, 250, 0.5)"
   ha-view-sections-column-gap: 8px
   ha-view-sections-row-gap: 8px
-  ha-view-sections-column-min-width: 250px # Можно также чуть уменьшить мин. ширину колонки
+  ha-view-sections-column-min-width: 250px
 
-  
   # Chips
   chip-background-color: "rgba(39, 225, 250, 0.15)"
   chip-text-color: "#cccccc"
@@ -206,6 +205,26 @@ biofects-extract:
     .mdc-data-table__row:hover {
       background-color: rgba(39, 225, 250, 0.1) !important;
     }
+
+    /* БРОНЕБОЙНЫЙ CSS ФИКС СКРЫТИЯ ПАНЕЛЕЙ ДЛЯ ССЫЛКИ С ?kiosk */
+    div.header, 
+    app-header, 
+    .header, 
+    #header,
+    ha-sidebar, 
+    aside#sidebar {
+      display: none !important;
+      width: 0px !important;
+      height: 0px !important;
+    }
+    #view, 
+    .mdc-drawer-app-content, 
+    partial-panel-resolver {
+      padding-left: 0px !important;
+      padding-top: 0px !important;
+      margin-left: 0px !important;
+      margin-top: 0px !important;
+    }
   
   card-mod-more-info: |
     $: |
@@ -244,6 +263,9 @@ biofects-extract:
     ha-card {
       --primary-text-color: #cccccc !important;
       --secondary-text-color: #87f7fc !important;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
     }
     
     /* All inputs inside cards */
@@ -267,4 +289,3 @@ biofects-extract:
     ha-card td {
       color: #cccccc !important;
     }
-
