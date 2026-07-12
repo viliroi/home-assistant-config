@@ -275,15 +275,16 @@
   mode: single
 - id: '1777634697698'
   alias: 'Набу: Голос через Малинку'
-  description: Перенаправляет ответ с микрофона ESP32 на динамики Raspberry Pi
+  description: Перенаправляет ответ с микрофона Малинки на её же динамики через Piper
   triggers:
   - trigger: state
-    entity_id: assist_satellite.robit
+    entity_id: assist_satellite.robot_pi_lva_assist_satellite
     attribute: tts_response
   conditions:
   - condition: template
-    value_template: '{{ state_attr(''assist_satellite.robit'', ''tts_response'') !=
-      None and state_attr(''assist_satellite.robit'', ''tts_response'') != '''' }}'
+    value_template: '{{ state_attr(''assist_satellite.robot_pi_lva_assist_satellite'',
+      ''tts_response'') != None and state_attr(''assist_satellite.robot_pi_lva_assist_satellite'',
+      ''tts_response'') != '''' }}'
   actions:
   - action: tts.speak
     target:
@@ -291,5 +292,6 @@
     data:
       cache: true
       media_player_entity_id: media_player.music_player_daemon_2
-      message: '{{ state_attr(''assist_satellite.robit'', ''tts_response'') }}'
+      message: '{{ state_attr(''assist_satellite.robot_pi_lva_assist_satellite'',
+        ''tts_response'') }}'
   mode: restart
