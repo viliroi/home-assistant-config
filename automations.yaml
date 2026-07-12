@@ -276,6 +276,7 @@
 - id: '1777634697698'
   alias: 'Набу: Голос через Малинку'
   description: Перенаправляет ответ с микрофона Малинки на её же динамики через Piper
+    с паузой музыки и возвратом слуха
   triggers:
   - trigger: state
     entity_id: assist_satellite.robot_pi_lva_assist_satellite
@@ -286,6 +287,10 @@
       ''tts_response'') != None and state_attr(''assist_satellite.robot_pi_lva_assist_satellite'',
       ''tts_response'') != '''' }}'
   actions:
+  - action: media_player.media_pause
+    target:
+      entity_id: media_player.robot_pi_lva_media_player
+    data: {}
   - action: tts.speak
     target:
       entity_id: tts.piper
@@ -294,4 +299,11 @@
       media_player_entity_id: media_player.music_player_daemon_2
       message: '{{ state_attr(''assist_satellite.robot_pi_lva_assist_satellite'',
         ''tts_response'') }}'
+  - delay: '00:00:00.500'
+  - wait_template: '{{ is_state(''media_player.music_player_daemon_2'', ''idle'')
+      or is_state(''media_player.music_player_daemon_2'', ''paused'') }}'
+    timeout: 00:00:30
+  - action: assist_satellite.listen
+    target:
+      entity_id: assist_satellite.robot_pi_lva_assist_satellite
   mode: restart
