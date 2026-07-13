@@ -99,3 +99,6 @@ sensor:
       
 assist_pipeline:
   debug_recording_dir: /share/assist_pipeline
+  
+gigachain:
+  ssl_verify: false
